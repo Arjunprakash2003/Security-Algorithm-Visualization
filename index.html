@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="./favicon.png" type="image/x-icon" />
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="apple-touch-icon" href="./favicon.png" />
+
+    <title>Security Visualization Tool</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+        iframe {
+            width: 100vw;
+            height: 100vh;
+            border: none;
+        }
+        .no-iframe {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <iframe src="https://securityviz.site/" frameborder="0" onerror="handleIframeError()"></iframe>
+    
+    <div class="no-iframe">
+        <h2>Security Visualization Tool</h2>
+        <p>Oops! Unable to load the embedded site. Please visit <a href="https://securityviz.site/" target="_blank">securityviz.site</a> directly.</p>
+    </div>
+
+    <script>
+        function handleIframeError() {
+            document.querySelector("iframe").style.display = "none";
+            document.querySelector(".no-iframe").style.display = "block";
+        }
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+            .then(reg => console.log("Service Worker Registered", reg))
+            .catch(err => console.error("Service Worker Registration Failed", err));
+        }
+    </script>
+</body>
+</html>
